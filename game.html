@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Quality Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #eaf4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #004466;
+        }
+
+        .game-container {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .good {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .bad {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .nav {
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #004466;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav">
+        <a href="fromscratch.html">← Back to Photography Page</a>
+    </div>
+
+    <h1>📸 Photo Quality Game</h1>
+
+    <div class="game-container">
+
+        <h2 id="question">Is this photo well taken?</h2>
+
+        <img id="photo" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="photo">
+
+        <div>
+            <button class="good" onclick="checkAnswer(true)">Good Photo</button>
+            <button class="bad" onclick="checkAnswer(false)">Bad Photo</button>
+        </div>
+
+        <h3 id="result"></h3>
+        <p>Score: <span id="score">0</span></p>
+
+        <button onclick="nextPhoto()">Next Photo</button>
+
+    </div>
+
+    <script>
+        let score = 0;
+
+        const photos = [
+            {
+                url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+                answer: true
+            },
+            {
+                url: "https://images.unsplash.com/photo-1520962922320-2038eebab146",
+                answer: false
+            },
+            {
+                url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+                answer: true
+            }
+        ];
+
+        let current = 0;
+
+        function loadPhoto() {
+            document.getElementById("photo").src = photos[current].url;
+            document.getElementById("result").innerText = "";
+        }
+
+        function checkAnswer(userAnswer) {
+            if (userAnswer === photos[current].answer) {
+                document.getElementById("result").innerText = "✅ Correct!";
+                score++;
+            } else {
+                document.getElementById("result").innerText = "❌ Try again!";
+            }
+
+            document.getElementById("score").innerText = score;
+        }
+
+        function nextPhoto() {
+            current++;
+            if (current >= photos.length) {
+                current = 0;
+            }
+            loadPhoto();
+        }
+
+        loadPhoto();
+    </script>
+
+</body>
+</html>
